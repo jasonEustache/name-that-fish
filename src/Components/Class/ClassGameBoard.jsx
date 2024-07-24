@@ -26,26 +26,24 @@ const fishes = initialFishes.map((fish) => {
 });
 
 export class ClassGameBoard extends Component {
-  state = {};
-
   render() {
-    const correct = this.props.state.correctCount;
-    const incorrect = this.props.state.incorrectCount;
+    const correct = this.props.score.correctCount;
+    const incorrect = this.props.score.incorrectCount;
     const total = correct + incorrect;
-    const isThisTheRightFish = fishes.includes(this.props.state.fishName);
+    const isThisTheRightFish = fishes[total] === this.props.score.fishName;
 
     const handleUserTextInput = (e) => {
-      this.props.setState({ fishName: e.target.value });
+      this.props.update({ fishName: e.target.value.toLowerCase() });
     };
 
     const handleUserSubmit = (e) => {
+      this.props.update({ fishName: "" });
       e.preventDefault();
       if (isThisTheRightFish) {
-        this.props.setState({ correctCount: correct + 1 });
+        this.props.update({ correctCount: correct + 1 });
       } else {
-        this.props.setState({ incorrectCount: incorrect + 1 });
+        this.props.update({ incorrectCount: incorrect + 1 });
       }
-      this.props.setState({ fishName: "" });
     };
 
     const nextFishToName = initialFishes[total];
@@ -57,7 +55,12 @@ export class ClassGameBoard extends Component {
         </div>
         <form id="fish-guess-form" onSubmit={handleUserSubmit}>
           <label htmlFor="fish-guess">What kind of fish is this?</label>
-          <input type="text" name="fish-guess" onChange={handleUserTextInput} />
+          <input
+            type="text"
+            name="fish-guess"
+            value={this.props.score.fishName}
+            onChange={handleUserTextInput}
+          />
           <input type="submit" />
         </form>
       </div>

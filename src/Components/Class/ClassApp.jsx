@@ -9,25 +9,22 @@ export class ClassApp extends Component {
     correctCount: 0,
     fishName: "",
   };
-
   update = (value) => {
     this.setState(value);
   };
 
   render() {
     const total = this.state.incorrectCount + this.state.correctCount;
-    const results = [this.state.incorrectCount, this.state.correctCount];
     const gameOver = total === 4;
-
+    const results = [this.state.correctCount, this.state.incorrectCount, total];
     return gameOver ? (
       <>
-        <ClassFinalScore display={results} />
+        <ClassFinalScore score={results} />
       </>
     ) : (
       <>
-        <ClassScoreBoard display={results} />
-
-        <ClassGameBoard state={this.state} setState={this.update} />
+        <ClassScoreBoard score={results} />
+        <ClassGameBoard score={this.state} update={this.update} />
       </>
     );
   }

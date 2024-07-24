@@ -1,8 +1,8 @@
 import "./styles/final-score.css";
 
 export const FunctionalFinalScore = (props) => {
-  const correct = props.result.increase;
-  const incorrect = props.result.decrease;
+  const correct = props.result.increase[0];
+  const total = props.result.total;
 
   return (
     <div id="final-score">
@@ -10,7 +10,7 @@ export const FunctionalFinalScore = (props) => {
       <div id="score">
         <p>{correct}</p>
         <hr />
-        <p>{incorrect}</p>
+        <p>{total}</p>
       </div>
     </div>
   );

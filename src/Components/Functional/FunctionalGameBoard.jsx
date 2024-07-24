@@ -31,11 +31,10 @@ export function FunctionalGameBoard(props) {
   const [fishTracker, setFishTracker] = useState(0);
   const [inputValue, setInput] = useState("");
   const nextFishToName = initialFishes[fishTracker];
-
   const isThisTheRightFish = fishes[fishTracker] === inputValue;
-
   const handleInputChange = (e) => {
-    setInput(e.target.value);
+    const toLowerCase = e.target.value.toLowerCase();
+    setInput(toLowerCase);
   };
 
   const handleOnSubmit = (e) => {

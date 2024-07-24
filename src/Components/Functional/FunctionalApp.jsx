@@ -8,30 +8,19 @@ export function FunctionalApp() {
   const [decrement, setDecrement] = useState(0);
   const total = increment + decrement;
   const gameOver = total !== 4;
-
+  const result = {
+    increase: [increment, setIncrement],
+    decrease: [decrement, setDecrement],
+    total: total,
+  };
   return gameOver ? (
     <>
-      <FunctionalScoreBoard
-        result={{
-          increase: [increment, setIncrement],
-          decrease: [decrement, setDecrement],
-        }}
-      />
-      <FunctionalGameBoard
-        result={{
-          increase: [increment, setIncrement],
-          decrease: [decrement, setDecrement],
-        }}
-      />
+      <FunctionalScoreBoard result={result} />
+      <FunctionalGameBoard result={result} />
     </>
   ) : (
     <>
-      <FunctionalFinalScore
-        result={{
-          increase: [increment, setIncrement],
-          decrease: [decrement, setDecrement],
-        }}
-      />
+      <FunctionalFinalScore result={result} />
     </>
   );
 }
